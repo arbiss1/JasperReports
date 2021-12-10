@@ -41,6 +41,9 @@ public class UserDaoImpl {
         // Parameters for report
         Map<String, Object> parameters = new HashMap<String, Object>();
 
+        //adding parameter on jasper reports
+        parameters.put("user_name","Arbis Malasi");
+
         JasperPrint print = JasperFillManager.fillReport(jasperReport, parameters, conn);
 
         return print;

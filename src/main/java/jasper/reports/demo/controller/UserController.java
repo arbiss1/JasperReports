@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletResponse;
+
+import jasper.reports.demo.doomain.User;
 import jasper.reports.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,5 +40,6 @@ public class UserController {
         jasperPrint = userService.exportPdfFile();
         JasperExportManager.exportReportToPdfStream(jasperPrint, out);
     }
+
 
 }
