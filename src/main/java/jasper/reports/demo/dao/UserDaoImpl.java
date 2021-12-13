@@ -3,13 +3,21 @@ package jasper.reports.demo.dao;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import jasper.reports.demo.domain.Users;
+import jasper.reports.demo.usersmapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +40,8 @@ public class UserDaoImpl {
     private ResourceLoader resourceLoader;
 
     public JasperPrint exportPdfFile() throws SQLException, JRException, IOException {
+        findInDb();
+
         Connection conn = jdbcTemplate.getDataSource().getConnection();
 
         String path = resourceLoader.getResource("classpath:users.jrxml").getURI().getPath();
@@ -46,7 +56,19 @@ public class UserDaoImpl {
 
         JasperPrint print = JasperFillManager.fillReport(jasperReport, parameters, conn);
 
+
         return print;
+    }
+
+
+    public String findInDb(){
+
+
+        String sql = "SELECT * FROM USER";
+        List<Users> users = jdbcTemplate.query(sql, new UserMapper());
+
+       return String.valueOf(users);
+
     }
 
 }

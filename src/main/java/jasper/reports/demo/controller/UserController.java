@@ -3,10 +3,12 @@ package jasper.reports.demo.controller;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
-import jasper.reports.demo.doomain.User;
+import jasper.reports.demo.domain.Users;
 import jasper.reports.demo.service.UserService;
+import jasper.reports.demo.usersmapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +41,7 @@ public class UserController {
         OutputStream out = response.getOutputStream();
         jasperPrint = userService.exportPdfFile();
         JasperExportManager.exportReportToPdfStream(jasperPrint, out);
+
     }
 
 

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import jasper.reports.demo.dao.UserDaoImpl;
-import jasper.reports.demo.doomain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
